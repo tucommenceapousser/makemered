@@ -3,8 +3,8 @@
 genredeyess_ai.py
 Ultra-complet: TUI/CLI image variant generator (Pillow + NumPy) + intégration OpenAI (GPT-4 suggestions & DALL·E)
 Usage:
-  python3 genredeyess_ai.py input.png output.png [--glow 20 --glitch --threshold 60 --font /path/to.ttf]
-  python3 genredeyess_ai.py                -> interactive TUI
+  python3 main.py input.png output.png [--glow 20 --glitch --threshold 60 --font /path/to.ttf]
+  python3 main.py                -> interactive TUI
 IA:
   export OPENAI_API_KEY="..."  # required for AI features
   Add --ai to use AI prompt generation or --ai-generate to call DALL·E (optionnel)
@@ -214,7 +214,7 @@ def add_neon_text(img, text="TRHACKNON", font_path=None, size_ratio=0.12, glow_l
         layer = layer.filter(ImageFilter.GaussianBlur(radius=blur))
         txt_layer = Image.alpha_composite(txt_layer, layer)
     d = ImageDraw.Draw(txt_layer)
-    d.text((x,y), text, font=font, fill=(255,255,255,255))
+    d.text((x,y), text, font=font, fill=(255,0,0,210))
     out = Image.alpha_composite(img.convert("RGBA"), txt_layer)
     return out
 
