@@ -3,8 +3,8 @@
 genredeyess_ai.py
 Ultra-complet: TUI/CLI image variant generator (Pillow + NumPy) + intégration OpenAI (GPT-4 suggestions & DALL·E)
 Usage:
-  python3 main.py input.png output.png [--glow 20 --glitch --threshold 60 --font /path/to.ttf]
-  python3 main.py                -> interactive TUI
+  python3 genredeyess_ai.py input.png output.png [--glow 20 --glitch --threshold 60 --font /path/to.ttf]
+  python3 genredeyess_ai.py                -> interactive TUI
 IA:
   export OPENAI_API_KEY="..."  # required for AI features
   Add --ai to use AI prompt generation or --ai-generate to call DALL·E (optionnel)
@@ -214,7 +214,7 @@ def add_neon_text(img, text="TRHACKNON", font_path=None, size_ratio=0.12, glow_l
         layer = layer.filter(ImageFilter.GaussianBlur(radius=blur))
         txt_layer = Image.alpha_composite(txt_layer, layer)
     d = ImageDraw.Draw(txt_layer)
-    d.text((x,y), text, font=font, fill=(255,0,0,210))
+    d.text((x,y), text, font=font, fill=(255,255,255,255))
     out = Image.alpha_composite(img.convert("RGBA"), txt_layer)
     return out
 
@@ -579,7 +579,7 @@ def run_tui():
         if res:
             info(f"Image générée: {res}")
             if OPENAI_API_KEY and ai_generate_resp.strip().lower().startswith("y"):
-                prompt_to_use = ai_prompt if ai_prompt else f"Create a stylized, eerie neon-eyed variant of the provided image, emphasizing red neon glows and a cyberpunk hacker theme, keeping image composition recognizable."
+                prompt_to_use = ai_prompt if ai_prompt else f"Create a highly stylized, eerie, devil-eyed variant of the provided image. Emphasize intense red neon glows in the eyes, with a dark, cyberpunk hacker atmosphere. Include subtle symbols of anti-capitalism, digital anarchy, and Anonymous-style masks. Use high-contrast neon colors, glitch effects, scanlines, and a futuristic, underground hacker aesthetic, while keeping the original image composition recognizable."
                 success = ai_generate_with_dalle(prompt_to_use, inp, out)
                 if success:
                     info("DALL·E a généré une image (sauvegardée).")
@@ -653,7 +653,7 @@ def main(argv=None):
             warn("OPENAI_API_KEY non configuré ou client OpenAI non disponible — génération IA impossible.")
         else:
             ai_prompt = args.ai_prompt if args.ai_prompt else (
-                "Create an eerie cyberpunk variant of the provided image: emphasize red neon 'eyes', subtle scanlines, slight chromatic aberration and a dark violet-cyan gradient overlay. Keep composition recognizable."
+                "Create a highly stylized, dark and eerie devil-eyed variant of the provided image. Emphasize intense red neon glows in the eyes, with a deep cyberpunk hacker atmosphere. Include a hooded figure wearing a Guy Fawkes mask, surrounded by subtle symbols of anti-capitalism, digital anarchy, and Anonymous-style rebellion. Use high-contrast neon colors, glitch effects, scanlines, and a gritty underground hacker aesthetic. Integrate the developer's name subtly as graffiti or code in the environment, without interfering with the main composition. Keep the original image composition recognizable."
             )
             ok = ai_generate_with_dalle(ai_prompt, input_path, output_path)
             if not ok:
