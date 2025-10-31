@@ -3,8 +3,8 @@
 genredeyess_ai.py
 Ultra-complet: TUI/CLI image variant generator (Pillow + NumPy) + intégration OpenAI (GPT-4 suggestions & DALL·E)
 Usage:
-  python3 genredeyess_ai.py input.png output.png [--glow 20 --glitch --threshold 60 --font /path/to.ttf]
-  python3 genredeyess_ai.py                -> interactive TUI
+  python3 main.py input.png output.png [--glow 20 --glitch --threshold 60 --font /path/to.ttf]
+  python3 main.py                -> interactive TUI
 IA:
   export OPENAI_API_KEY="..."  # required for AI features
   Add --ai to use AI prompt generation or --ai-generate to call DALL·E (optionnel)
